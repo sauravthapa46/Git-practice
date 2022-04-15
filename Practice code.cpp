@@ -1,45 +1,41 @@
 //assume that a bank maintains 2 accounts saving and current for customer. saving account compound int 10 % per year current account holder 5 % SI create a class account that stores customer name and account number .from this derive the classes current-_acc and saving_acc. Include necessary member functions and calculate the total amount of money in an account for both type of customers.
 #include<iostream>
+#include<cmath>
 using namespace std;
 class Account
 			{
 				protected:
 				int account_number;
-				char name[30];
+				string name;
 				public:
-				void setdata()
-				{
-					cout<<"Enter the name of the customer : "<<endl;
-					
-					cout<<"Enter the account number of the customer : "<<endl;
-					cin>>account_number;
-				}
-				virtual void display();
+					void setdata()
+									{
+										cout<<"Enter the name of the customer : "<<endl;
+										getline(cin,name);
+										fflush(stdin);
+										cout<<"Enter the account number of the customer : "<<endl;
+										cin>>account_number;
+										fflush(stdin);
+									}
+				void display()
+								{
+									cout<<"The name of the customer is : "<<name<<endl;
+									cout<<"The account number of the customer is : "<<account_number<<endl;	
+									}	
 			};
 class current_acc : public Account
 								{
 									private:
-									int p;
-									int t;
 									float simple_interest;
-									float amount;
 									static int rate;
 									public:
-									void input()
-									{
-										cout<<"Enter the Principle : "<<endl;
-										cin>>p;
-										cout<<"Enter the Time period"<<endl;
-										cin>>t;	
-									}
-									void calculation()
+									void calculation(float p,float t)
 									{
 										simple_interest=(p*t*rate)/100;
-										amount=p+simple_interest;
-									}	
+									}
 									void display()
 									{
-										cout<<"The Simple Interest is : "<<amount;
+										cout<<"The amount of Simple Interest is : "<<simple_interest;
 									}	
 								};
 int current_acc :: rate=5;
@@ -47,33 +43,52 @@ class saving_acc : public Account
 {
 
 								private:
-									int p;
-									int t;
 									float compound_interest;
 									float amount;
 									static int rate;
 									public:
-									void input()
+									void calculation(float p,float t)
 									{
-										cout<<"Enter the Principle : "<<endl;
-										cin>>p;
-										cout<<"Enter the Time period"<<endl;
-										cin>>t;	
-									}
-									void calculation()
-									{
-									
-										amount=p+compound_interest;
+										compound_interest=p*pow((1+rate/100),t);
 									}		
 									void display()
 									{
-										cout<<"The Compound interest is : "<<amount;
+										cout<<"The amount of Compound Interest is : "<<compound_interest;
 									}
 								};
 int saving_acc :: rate=10;
 int main()
 {
-	current_acc obj1;
+	int choice;
+	float p,t;
+	Account obj1;
+	current_acc obj2;
+	saving_acc obj3;
 	obj1.setdata();
-	return 1;
+	cout<<"Enter the Principle : "<<endl;	
+	cin>>p;
+	cout<<"Enter the Time period"<<endl;
+	cin>>t;	
+	cout<<"Please enter your choice : "<<endl;
+	cin>>choice;
+	if(choice!=1 && choice!=2)
+	{
+		cout<<"The entered choice is invalid"<<endl;
+		exit(0);
+	}
+	else
+	{
+	switch(choice)
+		{
+		case 1 :	obj1.display();
+					obj2.calculation(p,t);
+					obj2.display();
+					break;
+		case 2 :	obj1.display();
+					obj3.calculation(p,t);
+					obj3.display();				
+					break;
+		}
+	}
+	return 0;
 }
