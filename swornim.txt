@@ -1,6 +1,0 @@
-my name is swornim thapa.
-i study bit.
-i read in kist college.
-this is git paractice.
-pulled from college.
-
