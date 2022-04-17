@@ -27,36 +27,41 @@ class current_acc : public Account
 								{
 									private:
 									float simple_interest;
-									static int rate;
+									float amount;
+									static float rate;
 									public:
 									void calculation(float p,float t)
 									{
 										simple_interest=(p*t*rate)/100;
+										amount=p+simple_interest;
 									}
 									void display()
 									{
-										cout<<"The amount of Simple Interest is : "<<simple_interest;
+										cout<<"The amount of Simple Interest is : "<<simple_interest<<endl;
+										cout<<"The total balance of your account including Simple Interest is : "<<amount<<endl;
 									}	
 								};
-int current_acc :: rate=5;
+float current_acc :: rate=5;
 class saving_acc : public Account
 {
 
 								private:
 									float compound_interest;
 									float amount;
-									static int rate;
+									static float rate;
 									public:
 									void calculation(float p,float t)
 									{
-										compound_interest=p*pow((1+rate/100),t);
+										compound_interest=p*pow((1+rate/100),t)-p;
+										amount=p+compound_interest;
 									}		
 									void display()
 									{
-										cout<<"The amount of Compound Interest is : "<<compound_interest;
+										cout<<"The amount of Compound Interest is : "<<compound_interest<<endl;
+										cout<<"The total balance of your account including Compound Interest is : "<<amount<<endl;
 									}
 								};
-int saving_acc :: rate=10;
+float saving_acc :: rate=10;
 int main()
 {
 	int choice;
@@ -65,11 +70,13 @@ int main()
 	current_acc obj2;
 	saving_acc obj3;
 	obj1.setdata();
-	cout<<"Enter the Principle : "<<endl;	
+	cout<<"Please enter your Bank Balance : "<<endl;	
 	cin>>p;
-	cout<<"Enter the Time period"<<endl;
+	cout<<"Please enter the Time Period"<<endl;
 	cin>>t;	
-	cout<<"Please enter your choice : "<<endl;
+	cout<<"Please enter your choice for : "<<endl;
+	cout<<"1 : Simple Interest"<<endl;
+	cout<<"2 : Compound Interest"<<endl;
 	cin>>choice;
 	if(choice!=1 && choice!=2)
 	{
