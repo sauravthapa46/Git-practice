@@ -27,10 +27,19 @@ class current_acc : public Account
 								{
 									private:
 									float simple_interest;
+									float p;
+									float t;
 									float amount;
 									static float rate;
 									public:
-									void calculation(float p,float t)
+									void input()
+									{
+										cout<<"Enter your Bank Balance : "<<endl;
+										cin>>p;
+										cout<<"Enter the Time period in years : "<<endl;
+										cin>>t;
+									}
+									void calculation()
 									{
 										simple_interest=(p*t*rate)/100;
 										amount=p+simple_interest;
@@ -48,9 +57,18 @@ class saving_acc : public Account
 								private:
 									float compound_interest;
 									float amount;
+									float p;
+									float t;
 									static float rate;
 									public:
-									void calculation(float p,float t)
+									void input()
+									{
+										cout<<"Enter your Bank Balance : "<<endl;
+										cin>>p;
+										cout<<"Enter the Time period in years : "<<endl;
+										cin>>t;
+									}
+									void calculation()
 									{
 										compound_interest=p*pow((1+rate/100),t)-p;
 										amount=p+compound_interest;
@@ -65,15 +83,11 @@ float saving_acc :: rate=10;
 int main()
 {
 	int choice;
-	float p,t;
 	Account obj1;
 	current_acc obj2;
 	saving_acc obj3;
 	obj1.setdata();
-	cout<<"Please enter your Bank Balance : "<<endl;	
-	cin>>p;
-	cout<<"Please enter the Time Period"<<endl;
-	cin>>t;	
+	flag:
 	cout<<"Please enter your choice for : "<<endl;
 	cout<<"1 : Simple Interest"<<endl;
 	cout<<"2 : Compound Interest"<<endl;
@@ -81,18 +95,20 @@ int main()
 	if(choice!=1 && choice!=2)
 	{
 		cout<<"The entered choice is invalid"<<endl;
-		exit(0);
+		goto flag;
 	}
 	else
 	{
 	switch(choice)
 		{
-		case 1 :	obj1.display();
-					obj2.calculation(p,t);
+		case 1 :	obj2.input();
+					obj1.display();
+					obj2.calculation();
 					obj2.display();
 					break;
-		case 2 :	obj1.display();
-					obj3.calculation(p,t);
+		case 2 :	obj3.input();
+					obj1.display();
+					obj3.calculation();
 					obj3.display();				
 					break;
 		}

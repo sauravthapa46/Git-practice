@@ -13,7 +13,7 @@ class A
 };
 class B : public A
 {
-	public:
+	private:
 	int y,sum;
 	public:
 	void getData(int v)
