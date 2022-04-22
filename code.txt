@@ -1,1 +1,2 @@
 wap to print natural numbers upto 10.
+aga
