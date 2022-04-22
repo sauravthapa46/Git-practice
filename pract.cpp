@@ -34,7 +34,7 @@ Employee calculation(Employee A[])
 	Employee temp;
 	for(i=0;i<5;i++)
 	{
-		for(j=i+1;j<5;j++);
+		for(j=i+1;j<5;j++)
 		{
 			if(A[i].salary>A[j].salary)
 			{
@@ -44,7 +44,7 @@ Employee calculation(Employee A[])
 			}
 		}
 	}
-	return A[0];
+	return A[4];
 }
 int main()
 {
